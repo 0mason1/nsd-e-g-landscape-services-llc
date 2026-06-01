@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E&G Landscape Services LLC | Charlotte, NC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #3a6b35;
+      --green-light: #4e8f47;
+      --green-dark: #2a4f26;
+      --gold: #c9a84c;
+      --dark: #111;
+      --text: #333;
+      --light-bg: #f8f6f2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* PREVIEW BANNER */
+    #preview-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10000;
+      background: #111;
+      color: #e8d9a0;
+      text-align: center;
+      font-size: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      padding: 6px 1rem;
+      letter-spacing: 0.04em;
+    }
+    #preview-banner a {
+      color: #e8d9a0;
+      text-decoration: underline;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 28px;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+    }
+    nav.scrolled {
+      background: rgba(10, 10, 10, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: #fff;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-phone a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-phone a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--green);
+      color: #fff !important;
+      padding: 0.55rem 1.3rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      font-size: 0.82rem !important;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s !important;
+      cursor: pointer;
+      border: none;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; color: #fff !important; }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&auto=format&fit=crop&q=80') center center / cover no-repeat;
+      animation: heroZoom 18s ease-in-out infinite alternate;
+      transform-origin: center center;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.65) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      padding: 0 1.5rem;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(201,168,76,0.2);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.1rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.12;
+      margin-bottom: 1.25rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,0.88);
+      max-width: 580px;
+      margin: 0 auto 2.2rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--green);
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border: none;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--green-light); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border: 2px solid rgba(255,255,255,0.7);
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
+
+    /* TRUST BAR */
+    .trust-bar {
+      background: var(--dark);
+      padding: 2.2rem 1rem;
+    }
+    .trust-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      text-align: center;
+    }
+    .trust-item {
+      padding: 1.5rem 1rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .trust-label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    /* SECTION SHARED */
+    section { padding: 6rem 1.5rem; }
+    .section-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.18;
+      margin-bottom: 1rem;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: #666;
+      max-width: 560px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    /* SERVICES */
+    .services { background: var(--light-bg); }
+    .services-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .services-header .section-subtitle { margin: 0 auto; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 2.2rem 2rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      transition: transform 0.25s, box-shadow 0.25s;
+      border-top: 3px solid transparent;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border-top-color: var(--green);
+    }
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(58,107,53,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+    .service-card p {
+      font-size: 0.92rem;
+      color: #666;
+      line-height: 1.68;
+      font-weight: 300;
+    }
+
+    /* ABOUT */
+    .about { background: #fff; padding: 0; }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 560px;
+    }
+    .about-image {
+      background: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=900&auto=format&fit=crop&q=80') center center / cover no-repeat;
+      min-height: 480px;
+    }
+    .about-content {
+      background: var(--dark);
+      padding: 5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .about-content .section-eyebrow { color: var(--gold); }
+    .about-content .section-title { color: #fff; }
+    .about-content .section-title em { font-style: normal; color: var(--gold); }
+    .about-content p {
+      color: rgba(255,255,255,0.78);
+      font-size: 0.97rem;
+      line-height: 1.78;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+    .about-list {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    .about-list li {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.92rem;
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .about-list li::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* REVIEWS */
+    .reviews { background: #f4f1ed; }
+    .reviews-header {
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+    .reviews-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .review-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+    }
+    .stars {
+      color: #f5a623;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .review-text {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.72;
+      font-weight: 300;
+      flex: 1;
+      margin-bottom: 1.25rem;
+      font-style: italic;
+    }
+    .review-text::before { content: '\201C'; }
+    .review-text::after { content: '\201D'; }
+    .reviewer-info {
+      border-top: 1px solid #eee;
+      padding-top: 1rem;
+    }
+    .reviewer-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+    .reviewer-location {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 0.15rem;
+    }
+
+    /* CTA BANNER */
+    .cta-banner {
+      background: var(--green-dark);
+      padding: 4.5rem 1.5rem;
+      text-align: center;
+    }
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .cta-banner p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .cta-banner .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 0.9rem;
+      padding: 1rem 2.5rem;
+    }
+    .cta-banner .btn-primary:hover { background: #d4b45a; }
+
+    /* FOOTER */
+    footer {
+      background: #0d0d0d;
+      padding: 3rem 1.5rem 2rem;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+    .footer-contact {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .footer-contact a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-contact a:hover { color: var(--gold); }
+    .footer-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 1.25rem;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .about-inner { grid-template-columns: 1fr; }
+      .about-content { padding: 3.5rem 2rem; }
+      .about-image { min-height: 300px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .trust-inner { grid-template-columns: 1fr; }
+      .trust-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .trust-item:last-child { border-bottom: none; }
+    }
+
+    @media (max-width: 520px) {
+      .hero h1 { font-size: 2.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PREVIEW BANNER -->
+  <div id="preview-banner">
+    ✨ Free preview by North Star Digital — <a href="https://northstardigital.digital" target="_blank">northstardigital.digital</a>
+  </div>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a class="nav-logo" href="#"><span>E&G</span> Landscape Services</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li class="nav-phone"><a href="tel:(980) 616-0496">(980) 616-0496</a></li>
+      <li><button class="nav-cta" onclick="openQuote()">Get Free Quote</button></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Charlotte's Trusted Lawn & Landscape Experts</div>
+      <h1>Exceptional Landscapes,<br><em>Right Here in Charlotte</em></h1>
+      <p>From lush lawn maintenance to full-scale landscape design, E&G Landscape Services delivers stunning results for homeowners across the Charlotte metro area.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="openQuote()">Get Your Free Quote</button>
+        <a class="btn-outline" href="#services">Our Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <div class="trust-number">8+</div>
+        <div class="trust-label">Years Serving Charlotte</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">600+</div>
+        <div class="trust-label">Jobs Completed</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-number">99%</div>
+        <div class="trust-label">Client Satisfaction Rate</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-header">
+        <div class="section-eyebrow">What We Do</div>
+        <h2 class="section-title">Comprehensive Landscaping Services</h2>
+        <p class="section-subtitle">We handle everything your property needs to look its absolute best — season after season.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🌿</div>
+          <h3>Lawn Maintenance</h3>
+          <p>Consistent mowing, edging, trimming, and blowing to keep your lawn looking sharp every week. We tailor cutting schedules to your grass type and the Charlotte climate.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🌳</div>
+          <h3>Landscape Design & Installation</h3>
+          <p>Transform your outdoor space with custom planting plans, fresh beds, ornamental trees, and seasonal color that enhances curb appeal and property value.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">✂️</div>
+          <h3>Tree & Shrub Trimming</h3>
+          <p>Precision pruning and shaping keeps your trees and shrubs healthy, safe, and beautiful. We remove dead growth and shape overgrowth before it becomes a hazard.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🍂</div>
+          <h3>Mulching & Bed Cleanup</h3>
+          <p>Fresh mulch refreshes your beds, retains moisture, and suppresses weeds. We install premium hardwood mulch and handle full seasonal bed cleanups year-round.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💧</div>
+          <h3>Irrigation Services</h3>
+          <p>Properly watered lawns thrive. We install, repair, and optimize sprinkler systems to deliver the right amount of water at the right time — saving you money and effort.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🍃</div>
+          <h3>Seasonal Cleanups</h3>
+          <p>Spring and fall cleanups including leaf removal, debris haul-away, bed preparation, and aeration to give your lawn a healthy reset heading into any season.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <div class="about" id="about">
+    <div class="about-inner">
+      <div class="about-image"></div>
+      <div class="about-content">
+        <div class="section-eyebrow">About E&G Landscape Services</div>
+        <h2 class="section-title">Charlotte-Grown,<br><em>Community Proud</em></h2>
+        <p>E&G Landscape Services LLC was founded right here in Charlotte with a simple mission: deliver reliable, high-quality landscaping that homeowners can count on. Over the years, we've grown through word-of-mouth and repeat customers who trust us to treat their property like our own.</p>
+        <p>We're a fully licensed and insured local business. Every crew member is trained, detail-oriented, and dedicated to showing up on time and finishing the job right.</p>
+        <ul class="about-list">
+          <li>Locally owned &amp; operated in Charlotte, NC</li>
+          <li>Licensed, bonded &amp; fully insured</li>
+          <li>No-obligation free estimates</li>
+          <li>Residential &amp; commercial properties</li>
+          <li>Flexible scheduling and responsive communication</li>
+        </ul>
+        <button class="btn-primary" onclick="openQuote()">Schedule a Free Consultation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="reviews-header">
+        <div class="section-eyebrow">What Clients Say</div>
+        <h2 class="section-title">Trusted by Charlotte Homeowners</h2>
+      </div>
+      <p class="reviews-note">Real reviews pulled from Google upon site launch.</p>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">E&G completely transformed my backyard — the new plant beds look incredible and the lawn has never been thicker or greener. They showed up on time, worked hard, and left everything spotless.</p>
+          <div class="reviewer-info">
+            <div class="reviewer-name">Marcus T.</div>
+            <div class="reviewer-location">Charlotte, NC</div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">I've used three different landscaping companies over the years and E&G is by far the most professional and thorough. The mulching and edging they did made my whole front yard look brand new.</p>
+          <div class="reviewer-info">
+            <div class="reviewer-name">Jennifer R.</div>
+            <div class="reviewer-location">Ballantyne, NC</div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">Outstanding service from start to finish. They came out quickly for a quote, gave us a fair price, and the lawn maintenance has been consistent every single week. Highly recommend to anyone in Charlotte.</p>
+          <div class="reviewer-info">
+            <div class="reviewer-name">David L.</div>
+            <div class="reviewer-location">Steele Creek, NC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <div class="container">
+      <h2>Ready for a Lawn You'll Love?</h2>
+      <p>Call us today or request a free quote online — we'll get back to you within 24 hours.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;align-items:center;">
+        <button class="btn-primary" onclick="openQuote()" style="background:var(--gold);color:#111;">Get a Free Quote</button>
+        <a href="tel:(980) 616-0496" style="color:rgba(255,255,255,0.85);font-size:1rem;font-weight:600;text-decoration:none;letter-spacing:0.02em;">(980) 616-0496</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><span>E&G</span> Landscape Services LLC</div>
+    <div class="footer-tagline">Professional Landscaping · Charlotte, NC</div>
+    <div class="footer-contact">
+      <a href="tel:(980) 616-0496">(980) 616-0496</a>
+      <span style="color:rgba(255,255,255,0.2);">|</span>
+      <span style="color:rgba(255,255,255,0.5);font-size:0.9rem;">Charlotte, NC</span>
+    </div>
+    <hr class="footer-divider">
+    <div class="footer-copy">&copy; 2025 E&G Landscape Services LLC. All rights reserved. | Website by <a href="https://northstardigital.digital" target="_blank" style="color:rgba(255,255,255,0.4);text-decoration:underline;">North Star Digital</a></div>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('main-nav
